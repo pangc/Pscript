@@ -3,14 +3,17 @@
 #include <cstdarg>
 #include "lex.h"
 #include "lexsymb.h"
+#include "symtab.h"
+#include "synttree.h"
 #include "parse.h"
-// Names of our tokens for displaying them
-char *name[] = {
-   "IF", "ELSE", "PRINT", "INPUT", "ASSIGN", "EQUAL",
-   "CONCAT", "END_STMT", "OPEN_PAR", "CLOSE_PAR", "BEGIN_CS", "END_CS",
-   "ID", "STRING",
-};
+#include "intcode.h"
+
+
 int errors = 0;
+extern SymTab st;
+extern SyntTree tree;
+
+IntInstr *intcode;
 
 // Function used to report errors
 void Error (char *format, ...)   {
@@ -46,37 +49,7 @@ using namespace std;
 // The main program: just report all tokens found
 int main (int argc, char *argv[])  {
    int token;
-/*
-   // Set the input stream (either a file from the command line or stdin)
-   yyin = NULL;
-   if (argc == 2)   {
-      yyin = fopen (argv[1], "rt");
-   }
-   if (yyin == NULL)
-      yyin = stdin;
 
-   // Get all tokens and show them on screen
-   while ((token = yylex ()) != 0)   {
-      cout <<lineno << "Token: ";
-      switch (token)   {
-      case ID:
-	      cout << name[token-IF] << " = " << yylval.str << endl;
-		   delete [] yylval.str;
-		   break;
-      case STRING:
-	      cout << name[token-IF] << " = \"" << yylval.str << "\"" << endl;
-		   delete [] yylval.str;
-		   break;
-      case ERROR_TOKEN:
-	      cout << "ILLEGAL TOKEN" << endl;
-		   break;
-      default:
-	      cout << name[token-IF] << endl;
-         break;
-	   }
-   }
-   return 0;
-   */
    yyin = NULL;
    if (argc == 2)
       yyin = fopen (argv[1], "rt");
@@ -85,7 +58,9 @@ int main (int argc, char *argv[])  {
   // call the parser
    yyparse();
    ErrorSummary ();
-   return errors ? 1 : 0;
-   
+   intcode = GenIntCode (tree);
+   intcode->Number(1);
+   intcode->Show();
+   return errors ? 1 : 0;   
 }
 

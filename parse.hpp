@@ -69,13 +69,15 @@ extern int yydebug;
 typedef union YYSTYPE
 {
 /* Line 2049 of yacc.c  */
-#line 32 "parse.y"
+#line 38 "string.y"
 
-   char *str;
+   char    *str;     // a character string
+   SymDesc *symbol;  // entry from symbol table
+   TreeNode *tnode;  // node in the syntax tree
 
 
 /* Line 2049 of yacc.c  */
-#line 79 "parse.hpp"
+#line 81 "parse.hpp"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

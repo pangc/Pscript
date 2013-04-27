@@ -10,5 +10,4 @@ else   {           // Compound statement
    s = s + "does not ";
    s = s + "jump";
 }
-s = s + " over the lazy dog"
-print "s = " + s
+s = s + " over the lazy dog";

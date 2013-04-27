@@ -154,7 +154,7 @@ string
 // Generate a unique name for a string constant
 char *MakeName ()  {
    char *name = new char [10], num[4];
-   static n = 0;
+   static int n = 0;
    sprintf (num, "%d", ++n);
    strcpy (name, "strconst"); strcat (name, num);
    return name;

@@ -1,5 +1,5 @@
-Pscript:lex.o main.o parse.o
-	g++ lex.o parse.o synttree.o symtab.o main.o -o Pscript
+Pscript:lex.o main.o parse.o synttree.o symtab.o intcode.o
+	g++ lex.o parse.o synttree.o symtab.o intcode.o main.o -o Pscript
 lex.o:
 	flex -olex.cpp token.l
 	g++ -c lex.cpp -o lex.o
@@ -9,6 +9,8 @@ synttree.o:
 	g++ -c synttree.cpp -o synttree.o
 symtab.o:
 	g++ -c symtab.cpp -o symtab.o
+intcode.o:
+	g++ -c intcode.cpp -o intcode.o
 main.o:
 	g++ -c main.cpp -o main.o
 clean:
