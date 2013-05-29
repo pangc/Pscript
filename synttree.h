@@ -1,3 +1,5 @@
+#ifndef _SYNTTREE_H_
+#define _SYNTTREE_H_
 // The syntax tree node types
 enum NodeType  {
    // Statements
@@ -50,3 +52,4 @@ private:
 };
 
 typedef TreeNode *SyntTree;
+#endif

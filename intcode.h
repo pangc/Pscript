@@ -1,3 +1,5 @@
+#ifndef _INTCODE_H_
+#define _INTCODE_H_
 // The opcodes (these will probably also be our final bytecode opcodes)
 enum Opcode  {
    OP_NOP,           // no operation
@@ -25,6 +27,11 @@ public:
    IntInstr (Opcode _opcode, SymDesc *_str)   {opcode = _opcode; str = _str; next=NULL; target=NULL;}
    void Show ();
    void Number (int ln); // number the lines of this code block
+ int  Len ()   {
+      IntInstr *i = next; int cnt = 1;
+      while (i != NULL)   {cnt++; i=i->next;}
+      return cnt;
+   }
 
    int       n;         // line number
    Opcode    opcode;    // the opcode
@@ -34,3 +41,4 @@ public:
 };
 
 IntInstr *GenIntCode (SyntTree tree);
+#endif

@@ -12,6 +12,7 @@ SymDesc::~SymDesc ()  {
    if (this == NULL)   return;
    if (name != NULL)   delete [] name;
    if (cont != NULL)   delete [] cont;
+   if (next != NULL)   delete next;
 }
 
 void SymDesc::Show ()   {
@@ -22,7 +23,7 @@ void SymDesc::Show ()   {
 }
 
 SymTab::SymTab()   {
-   start = NULL;
+   start = NULL;current = NULL;
 }
 
 SymTab::~SymTab()   {
